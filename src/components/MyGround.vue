@@ -56,13 +56,16 @@
 import HeaderPage from './header.vue'
 import FooterPage from './footer.vue'
 import axios from 'axios'
+import emailjs from 'emailjs-com'
 export default {
     name: "MyGround",
     data() {
         return {
             name: '',
             location: '',
-            price: ''
+            price: '',
+            email :'',
+            user_name :''
         }
     },
     components: {
@@ -78,6 +81,22 @@ export default {
             });
              if(result.status ==201)
              {
+                console.log("Befor email")
+                    var templateParams = {
+                        name: this.name,
+                        email: this.email,
+                        user_name : this.user_name,
+                        location : this.location,
+                        message: "BOOK MY GROUND"
+                    }
+                    emailjs.send('service_5kgq1xk', 'template_bmloli9', templateParams,'pYmxdX68Chfp4DT9T')
+                        .then(function (response) {
+                            if(response.status==200)
+                            console.log('Booking Email Send SUCCESSFULLY!', response.status, response.text);
+                            else
+                            console.log("Failed To Send Booking Email")
+                        });
+                        console.log("After Email")
                 this.$router.push('/thankyou')
              }
             console.log("Booking Details", result.data);
@@ -88,11 +107,15 @@ export default {
         let result = localStorage.getItem("cricket1");
         console.log("Result", result);
         let user = JSON.parse(result);
-        console.log("User", user);
+        console.log("Ground", user);
         this.name = user.name;
         this.location = user.location;
         this.price = user.price;
-        console.log("Name", this.name)
+        let user_details = localStorage.getItem("User-Data");
+            user_details = JSON.parse(user_details);
+            this.email = user_details.email;
+            this.user_name = user_details.name;
+        console.log("User", user_details)
 
     }
 }

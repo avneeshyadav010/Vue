@@ -29,6 +29,7 @@
 
 <script>
 import axios from 'axios'
+import emailjs from 'emailjs-com';
 export default {
     name: "SignUp",
     data() {
@@ -41,6 +42,7 @@ export default {
         }
     },
     methods: {
+
         async signUp() {
             //  console.warn("Sign--Up",this.form.name,this.form.email,this.form.password);
             if (this.form.name.length > 0 && this.form.email.length > 0 && this.form.password.length > 0) {
@@ -53,7 +55,24 @@ export default {
                 console.log(result);
                 if (result.status == 201) {
                     localStorage.setItem("User-Data", JSON.stringify(result.data))
+                    console.log("Befor email")
+                    var templateParams = {
+                        from_name:"Book My Ground",
+                        name: this.form.name,
+                        email: this.form.email,
+                        message: "BOOK MY GROUND"
+                    }
+                    emailjs.send('service_5kgq1xk', 'template_wbcjj4n', templateParams,'pYmxdX68Chfp4DT9T')
+                        .then(function (response) {
+                            if(response.status==200)
+                            console.log('Registration Email Send SUCCESSFULLY!', response.status, response.text);
+                            else
+                            console.log("Failed To Send REgistration Email")
+                        });
+                        console.log("After Email")
                     this.$router.push('/home')
+
+
                 }
                 else {
                     this.$router.push('/sign-up');
@@ -65,7 +84,7 @@ export default {
                 console.log("Error : Any input field is empty");
                 alert("Enter Below Details")
                 this.$router.push('/sign-up');
-               
+
 
             }
 
@@ -76,7 +95,7 @@ export default {
     },
     mounted() {
         let user = localStorage.getItem('User-Data')
-        console.log("User Dtails -Sign-up:",user);
+        console.log("User Dtails -Sign-up:", user);
         if (user) {
             this.$router.push('/home')
         }

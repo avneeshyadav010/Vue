@@ -1,0 +1,55 @@
+{
+  "user": [
+    {
+      "name": "Test",
+      "email": "test123@gmail.com",
+      "password": "123",
+      "id": 1
+    },
+    {
+      "name": "Avi",
+      "email": "avi@gmail.com",
+      "password": "123",
+      "id": 2
+    },
+    {
+      "name": "Avi",
+      "email": "avi@gmail.com",
+      "password": "123",
+      "id": 3
+    },
+    {
+      "name": "pet",
+      "email": "pet@gmail.com",
+      "password": "123",
+      "id": 4
+    },
+    {
+      "name": "peter",
+      "email": "peter@gmail.com",
+      "password": "123",
+      "id": 5
+    },
+    {
+      "name": "Avneesh",
+      "email": "avneeshyadav0101@gmail.com",
+      "password": "123",
+      "id": 6
+    }
+  ],
+  "cricket": [],
+  "myGround": [
+    {
+      "name": "Green Park",
+      "location": "Kanpur",
+      "price": "Rs. 3000",
+      "id": 1
+    },
+    {
+      "name": "Ekana",
+      "location": "Lucknow",
+      "price": "Rs. 3000",
+      "id": 2
+    }
+  ]
+}
